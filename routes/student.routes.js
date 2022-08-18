@@ -6,7 +6,7 @@ const router = express.Router();
 const studentController = require("../controllers/student.controller");
 
 router.get(
-	"/:userName",
+	"/student/:userName",
 	// passport.authenticate("jwt", { session: false }),
 	studentController.getUser
 );

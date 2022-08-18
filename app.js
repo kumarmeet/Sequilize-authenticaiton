@@ -10,13 +10,16 @@ const port = process.env.PORT || 8080;
 const studentRoutes = require("./routes/student.routes");
 const authRoutes = require("./routes/auth.routes");
 
-app.use(express.urlencoded({ extended: false }));
+app.use(
+	express.urlencoded({ extended: false, limit: "100mb", parameterLimit: 10 })
+);
+
 app.use(express.json());
 
-app.use("/student", authRoutes);
+app.use("/api/v1", authRoutes);
 
 app.use(
-	"/student",
+	"/api/v1",
 	passport.authenticate("jwt", { session: false }),
 	studentRoutes
 );

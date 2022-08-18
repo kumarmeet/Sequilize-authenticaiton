@@ -6,13 +6,13 @@ const router = express.Router();
 const authController = require("../controllers/auth.controller");
 
 router.post(
-	"/signup",
+	"/student/signup",
 	passport.authenticate("signup", { session: false }),
 	authController.signup
 );
 
 router.post(
-	"/login",
+	"/student/login",
 	passport.authenticate("login", { session: false }),
 	authController.login
 );

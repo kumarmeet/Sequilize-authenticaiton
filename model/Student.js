@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../database/data.connection");
 
-//!has to be check how to use enum and set to STRING(length)
+//how to set the characters length into STRING(length)
 
 const student = sequelize.define("students", {
 	id: {
