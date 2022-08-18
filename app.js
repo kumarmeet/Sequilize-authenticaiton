@@ -5,7 +5,7 @@ require("./auth/auth");
 
 const app = express();
 
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 const studentRoutes = require("./routes/student.routes");
 const authRoutes = require("./routes/auth.routes");
@@ -15,11 +15,14 @@ app.use(express.json());
 
 app.use("/student", authRoutes);
 
-app.use(passport.authenticate("jwt", { session: false }));
-app.use("/student", studentRoutes);
+app.use(
+	"/student",
+	passport.authenticate("jwt", { session: false }),
+	studentRoutes
+);
 
 app.use((req, res) => {
-	res.status(404).render("404");
+	res.status(404).json({ message: "Resource not found!!" });
 });
 
 app.use((error, req, res, next) => {

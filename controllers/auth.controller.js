@@ -17,13 +17,12 @@ const login = async (req, res, next) => {
 
 			req.login(user, { session: false }, async (error) => {
 				if (error) return next(error);
-
-				const body = { id: user.id, email: user.email };
+				const body = { id: user.id, email: user.email, name: user.first_name };
 				const token = jwt.sign({ user: body }, "TOP_SECRET", {
 					expiresIn: "5m",
 				});
 
-				return res.status(200).json({ token });
+				return res.status(200).json({ token, name: user.first_name });
 			});
 		} catch (error) {
 			return next(error);
